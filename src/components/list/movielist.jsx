@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
+import {withRouter} from 'react-router-dom' 
 
 
 
@@ -28,15 +29,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function MovieGridList({List}) {
+ function MovieGridList({List,history}) {
   const classes = useStyles();
-    console.log(List)
+  const handleClick=(item)=>{
+    history.push(`/movie/${item.id}`)
+    
+}
   return (
     <div className={classes.root}>
       <GridList className={classes.gridList}  cols={2.5}>
         {List?List.map((item) => (
           <GridListTile style={{width:"10%"}} key={item.id}>
-            <img  src={`https://image.tmdb.org/t/p/w500/${item.poster_path}`} alt={item.title} />
+            <img  src={`https://image.tmdb.org/t/p/w500/${item.poster_path}`} onClick={()=>handleClick(item)} alt={item.title} />
             <GridListTileBar
               title={item.title}
               classes={{
@@ -51,3 +55,4 @@ export default function MovieGridList({List}) {
     </div>
   );
 }
+export default withRouter(MovieGridList)

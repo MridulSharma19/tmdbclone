@@ -7,7 +7,7 @@ const NowMovies=()=>{
     
     const getMovies=async()=>{
        try{ 
-        const response =await axios.get(`https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.API_KEY}&language=en-US&page=1`) 
+        const response =await axios.get('https://api.themoviedb.org/3/movie/now_playing?api_key=API_KEY&language=en-US&page=1') 
         setMovies(response.data.results)
         }catch(err){
             console.log(err)
